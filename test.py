@@ -8,6 +8,8 @@ def getFaceBox(net, frame, conf_threshold=0.5):
 
 	net.setInput(blob)
 	detections = net.forward()
+	net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+	net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
 	bboxes = []
 	for i in range(detections.shape[2]):
 		confidence = detections[0, 0, i, 2]
